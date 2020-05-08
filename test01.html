@@ -18,9 +18,9 @@
 var bluetoothDevice;
 var characteristic;
  
-//chibi:bit BLE UUID
-var LED_SERVICE_UUID                        = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
-var LED_TEXT_CHARACTERISTIC_UUID            = 'e95d93ee-251d-470a-a062-fa1922dfa9a8';
+// APP BLE UUID
+var APP_SERVICE_UUID                   = '1800';
+var APP_CHARACTERISTIC_UUID            = '1801';
  
  
 //ボタンイベントリスナー
@@ -35,7 +35,7 @@ function connect() {
   //options.acceptAllDevices = true;
   
   options.filters = [
-    {name: "MF500B 0000104"}
+    {name: "Find Me Target"}
   ];
   
   navigator.bluetooth.requestDevice(options)
@@ -46,11 +46,11 @@ function connect() {
   })
   .then(server =>{
     console.log("server", server)
-    return server.getPrimaryService(LED_SERVICE_UUID);
+    return server.getPrimaryService(APP_SERVICE_UUID);
   })
   .then(service => {
     console.log("service", service)
-    return service.getCharacteristic(LED_TEXT_CHARACTERISTIC_UUID)
+    return service.getCharacteristic(APP_CHARACTERISTIC_UUID)
   })
   .then(chara => {
     console.log("characteristic", chara)
