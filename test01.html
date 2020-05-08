@@ -32,13 +32,10 @@ d3.select("#send").on("click", sendMessage);
 //chibi:bitに接続する
 function connect() {
   let options = {};
- 
-  
   //options.acceptAllDevices = true;
   
   options.filters = [
-    {services: [LED_SERVICE_UUID]}, // <- 重要
-    {name: "BBC micro:bit [vaget]"}
+    {name: "MF500B 0000104"}
   ];
   
   navigator.bluetooth.requestDevice(options)
