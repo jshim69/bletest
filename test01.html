@@ -35,6 +35,7 @@ function connect() {
   //options.acceptAllDevices = true;
   
   options.filters = [
+    {services: [APP_SERVICE_UUID] },
     {name: "Find Me Target"}
   ];
   
