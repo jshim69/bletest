@@ -35,8 +35,7 @@ function connect() {
   //options.acceptAllDevices = true;
   
   options.filters = [
-    {services: [ 0x1802] },
-    {name: "Find Me Target"}
+    {namePrefix: "Find"}
   ];
   
   navigator.bluetooth.requestDevice(options)
