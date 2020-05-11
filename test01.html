@@ -9,7 +9,7 @@
 <body>
 <button id="connect">接続</button>
 <button id="disconnect">切断</button>
-<input id="message" value="hello" />
+<input id="level" value="1" />
 <button id="send">送信</button>
  
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>    
@@ -29,13 +29,13 @@ d3.select("#disconnect").on("click", disconnect);
 d3.select("#send").on("click", sendMessage);    
  
  
-//chibi:bitに接続する
 function connect() {
   let options = {};
   //options.acceptAllDevices = true;
   
   options.filters = [
-    {namePrefix: "Find"}
+    {services: [ 0x1802] },
+    {name: "Find Me Target"}
   ];
   
   navigator.bluetooth.requestDevice(options)
@@ -65,9 +65,10 @@ function connect() {
 //LEDに表示するメッセージを送信
 function sendMessage() {
   if (!bluetoothDevice || !bluetoothDevice.gatt.connected || !characteristic) return ;
-  var text = document.querySelector("#message").value;
-  var arrayBuffe = new TextEncoder().encode(text);
-  characteristic.writeValue(arrayBuffe);        
+  var level = document.querySelector("#level").value;
+  var num = parseInt(level, 10);
+  var arrayBuffer = new Uint8Array([num]);
+  characteristic.writeValue(arrayBuffer);
 }
  
  
